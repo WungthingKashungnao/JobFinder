@@ -18,12 +18,26 @@ app.use(cookieParser());
 app.use("/api", healthRouter);
 app.use("/api/auth", authRouter);
 
-app.use("/*", (req, res) => {
-  res.send({
-    message: "Route not found",
+// app.use("/*", (req, res) => {
+//   res.send({
+//     message: "Route not found",
+//   });
+// });
+// routes end
+
+// middleware for error handling start
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage =
+    err.message || "Something went wrong! Please try after some time.";
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack, //this will give more information about the error
   });
 });
-// routes end
+// middleware for error handling end
 
 app.listen(3001, () => {
   console.log(`server started successfully on port 3001`);
