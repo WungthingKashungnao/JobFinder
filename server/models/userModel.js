@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const UsrSchema = mongoose.Schema(
+const UsrSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -13,7 +13,7 @@ const UsrSchema = mongoose.Schema(
       unique: true,
     },
     mobile: {
-      type: String,
+      type: Number,
       required: true,
       unique: true,
     },
@@ -22,9 +22,7 @@ const UsrSchema = mongoose.Schema(
       required: true,
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 const UserModel =
