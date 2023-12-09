@@ -84,7 +84,7 @@ const loginUser = async (req, res) => {
         status: 400,
       });
 
-      res.status(400).json({
+      return res.status(400).json({
         message: `wrong email or password`,
       });
     }

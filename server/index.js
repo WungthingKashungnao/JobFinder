@@ -7,6 +7,7 @@ require("dotenv").config();
 const connect = require("./db/connect.js");
 const healthRouter = require("./routes/healthRoute.js");
 const authRouter = require("./routes/authRoutes.js");
+const jobRouter = require("./routes/jobRoutes.js");
 // local import end
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(cookieParser());
 // routes start
 app.use("/api", healthRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/job", jobRouter);
 
 // app.use("/*", (req, res) => {
 //   res.send({
