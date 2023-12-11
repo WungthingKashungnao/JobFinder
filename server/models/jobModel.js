@@ -7,6 +7,10 @@ const JobSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    recruiter: {
+      type: String,
+      required: true,
+    },
     logoUrl: {
       type: String,
       required: true,
