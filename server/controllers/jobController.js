@@ -45,7 +45,13 @@ const createJob = async (req, res, next) => {
     const userId = req.params.userId;
 
     const recruiterData = await UserModel.findById(userId);
-
+    // logic to split string by comma and store them in an array start
+    const skillData = req.body.skills;
+    let skillsArray = skillData;
+    if (typeof skillData === "string") {
+      skillsArray = skillData.split(",").map((skill) => skill.trim());
+    }
+    // logic to split string by comma and store them in an array end
     const name = req.body.name;
     const recruiter = recruiterData.name;
     const logoUrl = req.body.logoUrl;
@@ -56,7 +62,7 @@ const createJob = async (req, res, next) => {
     const location = req.body.location;
     const description = req.body.description;
     const about = req.body.about;
-    const skills = req.body.skills;
+    const skills = skillsArray;
     const information = req.body.information;
 
     const newJob = await jobModel({
@@ -97,8 +103,6 @@ const editJob = async (req, res, next) => {
     const recruiterData = await UserModel.findById(userId); //trying to get recruiter name from user model
     const jobRecruiter = await jobModel.findById(jobId); //trying to get recruiter name from jobmodel
 
-    // console.log(recruiterData.name);
-    // console.log(jobRecruiter.recruiter);
     if (recruiterData.name !== jobRecruiter.recruiter) {
       return next(createError(400, "This job post does not belong to you"));
     }
@@ -155,4 +159,23 @@ const filterJob = async (req, res, next) => {
 };
 // filter job end
 
-module.exports = { createJob, editJob, filterJob };
+// show job post description start
+const showJobPostDescription = async (req, res) => {
+  try {
+    const jobId = req.params.jobId;
+    const jobPost = await jobModel.findById(jobId);
+    return res.status(200).json({
+      message: "successfully fetched detailed description of job post",
+      jobPost,
+    });
+  } catch (error) {
+    console.log({
+      message: "error showing job post description",
+      status: 500,
+    });
+    next(createError(500, "error showing job post description"));
+  }
+};
+// show job post description end
+
+module.exports = { createJob, editJob, filterJob, showJobPostDescription };

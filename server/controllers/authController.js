@@ -43,11 +43,16 @@ const registerUser = async (req, res) => {
       password: hash,
     });
     newUser.save();
+    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
 
-    return res.status(200).json({
-      message: `successfully registered a new user`,
-      newUser,
-    });
+    return res
+      .cookie("access_token", token, { httpOnly: true })
+      .status(200)
+      .json({
+        message: `successfully registered a new user`,
+        recruiter: req.body.name,
+        newUser,
+      });
   } catch (error) {
     console.log({
       message: "Error Registering User",
@@ -94,6 +99,7 @@ const loginUser = async (req, res) => {
 
     res.cookie("access_token", token, { httpOnly: true }).status(200).json({
       message: `successfully logged in`,
+      recruiter: user.name,
       user,
     });
   } catch (error) {
