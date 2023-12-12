@@ -24,22 +24,15 @@ const SignUp = () => {
       navigate("/main");
       localStorage.setItem("user", result.data.newUser.name); //storing user name in localstorage on succesful signup
     } catch (error) {
-      toast.error(
-        "User with same data already exists, as all fields must be unique! except password",
-        {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        }
-      );
-      console.log({
-        message: "error signing up user",
-        error,
+      toast.error(`${error.response.data.message}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
       });
     }
   };
@@ -66,6 +59,7 @@ const SignUp = () => {
               required
               type="email"
               placeholder="Email"
+              value={userDetails.email}
               onChange={(e) =>
                 setUserDetails({ ...userDetails, email: e.target.value })
               }
@@ -73,6 +67,7 @@ const SignUp = () => {
             <input
               required
               type="number"
+              value={userDetails.mobile}
               // prevent entering unwanted characters in input field
               onKeyDown={(e) =>
                 ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
@@ -86,6 +81,7 @@ const SignUp = () => {
               required
               type="password"
               placeholder="Password"
+              value={userDetails.password}
               onChange={(e) =>
                 setUserDetails({ ...userDetails, password: e.target.value })
               }
@@ -94,6 +90,7 @@ const SignUp = () => {
               <input
                 required
                 type="checkbox"
+                value={userDetails.check}
                 onClick={(e) =>
                   setUserDetails({ ...userDetails, check: !userDetails.check })
                 }

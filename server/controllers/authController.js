@@ -1,9 +1,10 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/userModel.js");
+const createError = require("../utils/error.js");
 
 // register user start
-const registerUser = async (req, res) => {
+const registerUser = async (req, res, next) => {
   try {
     // ecrypting the password start
     const salt = bcrypt.genSaltSync(10);
@@ -21,17 +22,32 @@ const registerUser = async (req, res) => {
 
     if (existingData[0] !== undefined) {
       const { name, email, mobile } = existingData[0];
-      if (
-        name === req.body.name ||
-        email === req.body.email ||
-        mobile == req.body.mobile
-      ) {
-        console.log(
-          `There is already an existing user with similar credentials`
+
+      if (name === req.body.name) {
+        return next(
+          createError(
+            400,
+            `There is already an existing user with the same name`
+          )
         );
-        return res.status(400).json({
-          message: `There is already an existing user with similar credentials`,
-        });
+      }
+
+      if (email === req.body.email) {
+        return next(
+          createError(
+            400,
+            `There is already an existing user with the same email`
+          )
+        );
+      }
+
+      if (mobile == req.body.mobile) {
+        return next(
+          createError(
+            400,
+            `There is already an existing user with the same phone number`
+          )
+        );
       }
     }
     // checking if there is already an existing user with same data for the properties ====> end
@@ -54,14 +70,7 @@ const registerUser = async (req, res) => {
         newUser,
       });
   } catch (error) {
-    console.log({
-      message: "Error Registering User",
-      error,
-    });
-    return res.status(500).json({
-      message: "Error Registering User",
-      error,
-    });
+    return next(createError(500, "Error Registering User"));
   }
 };
 // register user end
@@ -71,10 +80,6 @@ const loginUser = async (req, res) => {
   try {
     const user = await UserModel.findOne({ email: req.body.email });
     if (!user) {
-      console.log({
-        message: "user not found",
-        status: 400,
-      });
       return res.status(400).json({ message: "user not found" });
     }
 
@@ -84,11 +89,6 @@ const loginUser = async (req, res) => {
       user.password
     );
     if (!isPasswordCorrect) {
-      console.log({
-        message: `wrong email or password`,
-        status: 400,
-      });
-
       return res.status(400).json({
         message: `wrong email or password`,
       });
@@ -103,10 +103,7 @@ const loginUser = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.log({
-      message: `Error loggin in user`,
-      error,
-    });
+    next(createError(500, "Error loggin in user"));
   }
 };
 // login user end

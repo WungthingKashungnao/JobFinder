@@ -31,10 +31,6 @@ const SignUp = () => {
         progress: undefined,
         theme: "colored",
       });
-      console.log({
-        message: "error signing up user",
-        error,
-      });
     }
   };
   // function to login end
@@ -50,12 +46,14 @@ const SignUp = () => {
               required
               type="email"
               placeholder="Email"
+              value={user.email}
               onChange={(e) => setUser({ ...user, email: e.target.value })}
             />
             <input
               required
               type="password"
               placeholder="Password"
+              value={user.password}
               onChange={(e) => setUser({ ...user, password: e.target.value })}
             />
             <button>Sign in</button>
