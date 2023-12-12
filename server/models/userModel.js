@@ -22,12 +22,6 @@ const UsrSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // jobsPosted: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "JobModel",
-    //   },
-    // ],
   },
   { timestamps: true }
 );

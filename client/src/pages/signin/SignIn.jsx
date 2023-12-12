@@ -1,8 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./stylesSignIn.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const SignUp = () => {
+  const loginUrl = `http://localhost:3001/api/auth/loginUser`;
+  const navigate = useNavigate();
+  // use details
+  const [user, setUser] = useState({
+    email: null,
+    password: null,
+  });
+  // function to login start
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await axios.post(`${loginUrl}`, user);
+      localStorage.setItem("user", result.data.user.name); //storing user name in localstorage on succesful login
+      navigate("/main");
+    } catch (error) {
+      toast.error("Icorrect email or password!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      console.log({
+        message: "error signing up user",
+        error,
+      });
+    }
+  };
+  // function to login end
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -10,9 +45,19 @@ const SignUp = () => {
           <h1>Already have an account?</h1>
           <p>Your personal job finder is here</p>
 
-          <form>
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
+          <form onSubmit={handleSubmit}>
+            <input
+              required
+              type="email"
+              placeholder="Email"
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+            />
+            <input
+              required
+              type="password"
+              placeholder="Password"
+              onChange={(e) => setUser({ ...user, password: e.target.value })}
+            />
             <button>Sign in</button>
             <p>
               Don't have an account?{" "}
@@ -26,6 +71,7 @@ const SignUp = () => {
       <div className={styles.right}>
         <h2>Your Personal Job Finder</h2>
       </div>
+      <ToastContainer />
     </div>
   );
 };

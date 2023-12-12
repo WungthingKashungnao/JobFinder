@@ -1,8 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styleSignUp.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const registerUrl = "http://localhost:3001/api/auth/registerUser";
+  // state for user details
+  const [userDetails, setUserDetails] = useState({
+    name: null,
+    email: null,
+    mobile: null,
+    password: null,
+    check: false,
+  });
+  // function to register start
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await axios.post(`${registerUrl}`, userDetails);
+      navigate("/main");
+      localStorage.setItem("user", result.data.newUser.name); //storing user name in localstorage on succesful signup
+    } catch (error) {
+      toast.error(
+        "User with same data already exists, as all fields must be unique! except password",
+        {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        }
+      );
+      console.log({
+        message: "error signing up user",
+        error,
+      });
+    }
+  };
+  // function to register end
   return (
     <div className={styles.container}>
       {/* left start */}
@@ -11,20 +52,52 @@ const SignUp = () => {
         <div className={styles.leftInner}>
           <h1>Create an account</h1>
           <p>Your personal job finder is here</p>
-          <form>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
+          <form onSubmit={handleSubmit}>
             <input
+              required
+              type="text"
+              placeholder="Name"
+              value={userDetails.name}
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, name: e.target.value })
+              }
+            />
+            <input
+              required
+              type="email"
+              placeholder="Email"
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, email: e.target.value })
+              }
+            />
+            <input
+              required
               type="number"
               // prevent entering unwanted characters in input field
               onKeyDown={(e) =>
                 ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
               }
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, mobile: e.target.value })
+              }
               placeholder="Mobile"
             />
-            <input type="password" placeholder="Password" />
+            <input
+              required
+              type="password"
+              placeholder="Password"
+              onChange={(e) =>
+                setUserDetails({ ...userDetails, password: e.target.value })
+              }
+            />
             <div className={styles.checkbox}>
-              <input type="checkbox" />{" "}
+              <input
+                required
+                type="checkbox"
+                onClick={(e) =>
+                  setUserDetails({ ...userDetails, check: !userDetails.check })
+                }
+              />{" "}
               <label>
                 By creating an account, I agree to our terms of use and privacy
                 policy
@@ -48,6 +121,7 @@ const SignUp = () => {
         <h2>Your Personal Job Finder</h2>
       </div>
       {/* right end */}
+      <ToastContainer />
     </div>
   );
 };
