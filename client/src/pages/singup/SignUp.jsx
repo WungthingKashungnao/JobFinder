@@ -23,6 +23,7 @@ const SignUp = () => {
       const result = await axios.post(`${registerUrl}`, userDetails);
       navigate("/main");
       localStorage.setItem("user", result.data.newUser.name); //storing user name in localstorage on succesful signup
+      localStorage.setItem("access_token", result.data.token); //storing the token in localstorage on succesful signup
     } catch (error) {
       toast.error(`${error.response.data.message}`, {
         position: "top-center",

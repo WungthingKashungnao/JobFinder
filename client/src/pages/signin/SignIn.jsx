@@ -19,7 +19,9 @@ const SignUp = () => {
     try {
       const result = await axios.post(`${loginUrl}`, user);
       localStorage.setItem("user", result.data.user.name); //storing user name in localstorage on succesful login
-      navigate("/main");
+      localStorage.setItem("access_token", result.data.token); //storing the token in localstorage on succesful login
+      // navigate("/main");
+      navigate("/addjob");
     } catch (error) {
       toast.error("Icorrect email or password!", {
         position: "top-center",

@@ -68,6 +68,7 @@ const registerUser = async (req, res, next) => {
         message: `successfully registered a new user`,
         recruiter: req.body.name,
         newUser,
+        token,
       });
   } catch (error) {
     return next(createError(500, "Error Registering User"));
@@ -94,13 +95,14 @@ const loginUser = async (req, res) => {
       });
     }
     //chcking if password is correct end
-
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    // res.set("Authorization", "Bearer " + token);
 
     res.cookie("access_token", token, { httpOnly: true }).status(200).json({
       message: `successfully logged in`,
       recruiter: user.name,
       user,
+      token,
     });
   } catch (error) {
     next(createError(500, "Error loggin in user"));

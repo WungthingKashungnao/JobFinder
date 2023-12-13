@@ -42,7 +42,8 @@ const createJob = async (req, res, next) => {
       });
       return next(createError(400, "all fields are required"));
     }
-    const userId = req.params.userId;
+    const userId = req.params.userId; // id from params
+    // const userId = req.body.userId;
 
     const recruiterData = await UserModel.findById(userId);
     // logic to split string by comma and store them in an array start

@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./addjob.module.css";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const AddJob = () => {
+  // const createJobUrl = `http://localhost:3001/api/job/createJob`;
+  const [job, setJob] = useState({
+    name: "",
+    recruiter: "",
+    logoUrl: "",
+    position: "",
+    salary: "",
+    jobType: "",
+    jobPlace: "",
+    location: "",
+    description: "",
+    about: "",
+    skills: "",
+    information: "",
+    // userId: userId,
+  });
+
+  // function to submit job
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const token = localStorage.getItem("access_token"); //accessing the stored in localstorage
+    const decodedToken = jwtDecode(token); //using jwt-decode package to decode the token
+    const userId = decodedToken.id;
+    try {
+      const result = await axios.post(
+        `http://localhost:3001/api/job/createJob/${userId}`,
+        job
+      );
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={styles.container}>
       {/* left start */}
@@ -10,31 +46,65 @@ const AddJob = () => {
         <div className={styles.leftInner}>
           <h1>Add job description</h1>
           {/* form start */}
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className={styles.inptCon}>
               <label>Conpmay Name</label>{" "}
-              <input type="text" placeholder="Enter your company name here" />
+              <input
+                required
+                type="text"
+                placeholder="Enter your company name here"
+                value={job.name}
+                onChange={(e) => setJob({ ...job, name: e.target.value })}
+              />
             </div>
 
             <div className={styles.inptCon}>
               <label>Add logo URL</label>{" "}
-              <input type="url" placeholder="Enter the link" />
+              <input
+                required
+                type="url"
+                placeholder="Enter the link"
+                value={job.logoUrl}
+                onChange={(e) => setJob({ ...job, logoUrl: e.target.value })}
+              />
             </div>
 
             <div className={styles.inptCon}>
               <label>Job position</label>{" "}
-              <input type="text" placeholder="Enter job position" />
+              <input
+                required
+                type="text"
+                placeholder="Enter job position"
+                value={job.position}
+                onChange={(e) => setJob({ ...job, position: e.target.value })}
+              />
             </div>
 
             <div className={styles.inptCon}>
               <label>Monthly Salaary</label>{" "}
-              <input type="number" placeholder="Enter amount in rupees" />
+              <input
+                required
+                type="number"
+                placeholder="Enter amount in rupees"
+                // prevent entering unwanted characters in input field
+                onKeyDown={(e) =>
+                  ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
+                }
+                value={job.salary}
+                onChange={(e) => setJob({ ...job, salary: e.target.value })}
+              />
             </div>
 
             <div className={styles.inptCon}>
               <label>Job Type</label>{" "}
-              <select>
-                <option value="">Select</option>
+              <select
+                required
+                onChange={(e) => setJob({ ...job, jobType: e.target.value })}
+                defaultValue={job.jobType}
+              >
+                <option value="" disabled>
+                  Select
+                </option>
                 <option value="fulltime">Fulltime</option>
                 <option value="contract">Contract</option>
                 <option value="parttime">Parttime</option>
@@ -44,8 +114,14 @@ const AddJob = () => {
 
             <div className={styles.inptCon}>
               <label>Remote/Office</label>{" "}
-              <select>
-                <option value="">Select</option>
+              <select
+                required
+                onChange={(e) => setJob({ ...job, jobPlace: e.target.value })}
+                defaultValue={job.jobPlace}
+              >
+                <option value="" disabled>
+                  Select
+                </option>
                 <option value="remote">Remote</option>
                 <option value="office">Office</option>
                 <option value="hybrid">Hybrid</option>
@@ -54,29 +130,58 @@ const AddJob = () => {
 
             <div className={styles.inptCon}>
               <label>Location</label>{" "}
-              <input type="text" placeholder="Enter location" />
+              <input
+                required
+                type="text"
+                placeholder="Enter location"
+                value={job.location}
+                onChange={(e) => setJob({ ...job, location: e.target.value })}
+              />
             </div>
 
             <div className={styles.inptCon}>
               <label className={styles.txtLbl}>Job Description</label>{" "}
-              <textarea placeholder="Type the job description"></textarea>
+              <textarea
+                required
+                placeholder="Type the job description"
+                value={job.description}
+                onChange={(e) =>
+                  setJob({ ...job, description: e.target.value })
+                }
+              ></textarea>
             </div>
 
             <div className={styles.inptCon}>
               <label className={styles.txtLbl}>About Company</label>{" "}
-              <textarea placeholder="Type about your company"></textarea>
+              <textarea
+                required
+                placeholder="Type about your company"
+                value={job.about}
+                onChange={(e) => setJob({ ...job, about: e.target.value })}
+              ></textarea>
             </div>
 
             <div className={styles.inptCon}>
               <label>Skills Required</label>{" "}
-              <input type="text" placeholder="Enter the must have skills" />
+              <input
+                required
+                type="text"
+                placeholder="Enter the must have skills"
+                value={job.skills}
+                onChange={(e) => setJob({ ...job, skills: e.target.value })}
+              />
             </div>
 
             <div className={styles.inptCon}>
               <label>Information</label>{" "}
               <input
+                required
                 type="text"
                 placeholder="Enter the additional information"
+                value={job.information}
+                onChange={(e) =>
+                  setJob({ ...job, information: e.target.value })
+                }
               />
             </div>
 
