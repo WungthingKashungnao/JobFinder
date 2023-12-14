@@ -96,14 +96,16 @@ const loginUser = async (req, res) => {
     }
     //chcking if password is correct end
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-    // res.set("Authorization", "Bearer " + token);
 
-    res.cookie("access_token", token, { httpOnly: true }).status(200).json({
-      message: `successfully logged in`,
-      recruiter: user.name,
-      user,
-      token,
-    });
+    return res
+      .cookie("access_token", token, { httpOnly: true })
+      .status(200)
+      .json({
+        message: `successfully logged in`,
+        recruiter: user.name,
+        user,
+        token,
+      });
   } catch (error) {
     next(createError(500, "Error loggin in user"));
   }

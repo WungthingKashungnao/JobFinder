@@ -3,9 +3,8 @@ const createError = require("./error.js");
 
 const verifyToken = (req, res, next) => {
   // checking token exists or not start
-  const token = req.cookies.access_token;
-  // const token = req.get("Authorization");
-  console.log("from verify middleware =====>", token);
+  const token = req.body.token; //token sent from the client
+  // const token = req.cookies.access_token;
   if (!token) {
     console.log({
       message: "you are not authenticated",

@@ -10,8 +10,8 @@ const SignUp = () => {
   const navigate = useNavigate();
   // use details
   const [user, setUser] = useState({
-    email: null,
-    password: null,
+    email: "",
+    password: "",
   });
   // function to login start
   const handleSubmit = async (e) => {

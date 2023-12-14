@@ -10,10 +10,10 @@ const SignUp = () => {
   const registerUrl = "http://localhost:3001/api/auth/registerUser";
   // state for user details
   const [userDetails, setUserDetails] = useState({
-    name: null,
-    email: null,
-    mobile: null,
-    password: null,
+    name: "",
+    email: "",
+    mobile: "",
+    password: "",
     check: false,
   });
   // function to register start

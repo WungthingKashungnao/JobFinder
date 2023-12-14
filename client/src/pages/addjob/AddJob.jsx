@@ -5,6 +5,9 @@ import { jwtDecode } from "jwt-decode";
 
 const AddJob = () => {
   // const createJobUrl = `http://localhost:3001/api/job/createJob`;
+  const token = localStorage.getItem("access_token"); //accessing the stored in localstorage
+  const decodedToken = jwtDecode(token); //using jwt-decode package to decode the token
+  const userId = decodedToken.id;
   const [job, setJob] = useState({
     name: "",
     recruiter: "",
@@ -18,21 +21,22 @@ const AddJob = () => {
     about: "",
     skills: "",
     information: "",
-    // userId: userId,
+    token: token,
   });
 
   // function to submit job
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("access_token"); //accessing the stored in localstorage
-    const decodedToken = jwtDecode(token); //using jwt-decode package to decode the token
-    const userId = decodedToken.id;
+
     try {
       const result = await axios.post(
         `http://localhost:3001/api/job/createJob/${userId}`,
         job
       );
-      console.log(result);
+      console.log({
+        message: "successfully added a new job",
+        result,
+      });
     } catch (error) {
       console.log(error);
     }
