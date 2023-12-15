@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styles from "./addjob.module.css";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddJob = () => {
   // const createJobUrl = `http://localhost:3001/api/job/createJob`;
@@ -36,6 +38,16 @@ const AddJob = () => {
       console.log({
         message: "successfully added a new job",
         result,
+      });
+      toast.success("🦄 Wow so easy!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
       });
     } catch (error) {
       console.log(error);
@@ -208,6 +220,7 @@ const AddJob = () => {
         <h2>Recruiter add job details here</h2>
       </div>
       {/* right end */}
+      <ToastContainer />
     </div>
   );
 };

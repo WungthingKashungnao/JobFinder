@@ -21,7 +21,7 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const result = await axios.post(`${registerUrl}`, userDetails);
-      navigate("/main");
+      navigate("/");
       localStorage.setItem("user", result.data.newUser.name); //storing user name in localstorage on succesful signup
       localStorage.setItem("access_token", result.data.token); //storing the token in localstorage on succesful signup
     } catch (error) {

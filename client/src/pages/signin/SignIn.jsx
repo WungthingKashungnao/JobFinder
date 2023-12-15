@@ -21,7 +21,7 @@ const SignUp = () => {
       localStorage.setItem("user", result.data.user.name); //storing user name in localstorage on succesful login
       localStorage.setItem("access_token", result.data.token); //storing the token in localstorage on succesful login
       // navigate("/main");
-      navigate("/addjob");
+      navigate("/");
     } catch (error) {
       toast.error("Icorrect email or password!", {
         position: "top-center",
