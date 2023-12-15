@@ -1,25 +1,53 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./viewjob.module.css";
 import { useNavigate } from "react-router-dom";
+import { context } from "../../context/ContextApi";
 
 const ViewJob = () => {
+  const { isLoggedIn } = useContext(context);
   const navigate = useNavigate();
   return (
     <div className={styles.container}>
       {/* header start */}
       <header>
         <p className={styles.brand}>Jobfinder</p>
-        <div className={styles.loginCon}>
-          <button className={styles.login} onClick={() => navigate("/signin")}>
-            Login
-          </button>
-          <button
-            className={styles.register}
-            onClick={() => navigate("/signup")}
-          >
-            Register
-          </button>
-        </div>
+
+        {isLoggedIn ? (
+          <>
+            {/* logout start  */}
+            <div className={styles.logoutCon}>
+              <p>Logout</p>
+              <div className={styles.logooutRecruiter}>
+                <span>Hello! Recruiter</span>
+                <img
+                  src="https://xsgames.co/randomusers/avatar.php?g=female"
+                  alt=""
+                />
+              </div>
+            </div>
+            {/* logout end */}
+          </>
+        ) : (
+          <>
+            {/* login start */}
+            <div className={styles.loginCon}>
+              <button
+                className={styles.login}
+                onClick={() => navigate("/signin")}
+              >
+                Login
+              </button>
+              <button
+                className={styles.register}
+                onClick={() => navigate("/signup")}
+              >
+                Register
+              </button>
+            </div>
+            {/* login end */}
+          </>
+        )}
+
         {/* header end */}
       </header>
       {/* header end */}
@@ -37,18 +65,29 @@ const ViewJob = () => {
         <div className={styles.jobInfoCard}>
           {/* job info meta data start */}
           <div className={styles.jobInfoMetaData}>
-            <p className={styles.jobPostedTimePast}>1w ago - Full time</p>
-            <h2 className={styles.jobTitle}>WordPress Development </h2>
+            <div className={styles.companyDetails}>
+              <p className={styles.jobPostedTimePast}>1w ago - Full time </p>
+              {isLoggedIn && (
+                <>
+                  <img
+                    src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
+                    alt=""
+                  />
+                  <p>Google</p>
+                </>
+              )}
+            </div>
+
+            <div className={styles.jobTitle}>
+              <h2>WordPress Development</h2>
+              {isLoggedIn && <button>Edit job</button>}
+            </div>
             <p className={styles.jobLocation}>Bangalore | India</p>
             <div className={styles.salaryJobINfo}>
-              <div className="stipened">
-                <p>Stipened</p>
-                <p>rs 250000/month</p>
-              </div>
-              <div className="duration">
-                <p>duration</p>
-                <p>6 months</p>
-              </div>
+              <p>
+                <i class="fa-regular fa-money-bill-1"></i> Stipened
+              </p>
+              <p>Rs 250000/month</p>
             </div>
           </div>
           {/* job info meta data end */}

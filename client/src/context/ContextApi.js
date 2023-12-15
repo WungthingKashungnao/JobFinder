@@ -1,9 +1,14 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
 export const context = createContext();
 
 const ContextApi = ({ children }) => {
-  return <context.Provider value={{}}>{children}</context.Provider>;
+  const [isLoggedIn, setIsLoggedIn] = useState(false); //state for login status
+  return (
+    <context.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      {children}
+    </context.Provider>
+  );
 };
 
 export default ContextApi;

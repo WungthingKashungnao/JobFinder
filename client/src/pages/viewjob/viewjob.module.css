@@ -40,6 +40,31 @@ header {
       border-radius: 5px;
     }
   }
+
+  .logoutCon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+    font-weight: bold;
+    > p {
+      cursor: pointer;
+    }
+    .logooutRecruiter {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span {
+        margin-right: 1rem;
+      }
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+    }
+  }
 }
 /* header end */
 
@@ -96,21 +121,46 @@ header {
     p {
       color: #595959;
     }
+
     /* job info meta data start */
     .jobInfoMetaData {
+      width: 100%;
+      .companyDetails {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1rem;
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+      }
+
       .jobTitle {
-        font-size: 2erm;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
         margin-top: 1rem;
         margin-bottom: 0.3rem;
+        h2 {
+          font-size: 2rem;
+        }
+        button {
+          cursor: pointer;
+          background-color: #ed5353;
+          color: white;
+          padding: 0.5rem 1.5rem;
+          border: none;
+          outline: none;
+          border-radius: 5px;
+        }
       }
       .jobLocation {
         color: #ed5353;
         font-weight: bold;
         margin-bottom: 1rem;
-      }
-      .salaryJobINfo {
-        display: flex;
-        gap: 2rem;
       }
     }
     /* job info meta data end */
