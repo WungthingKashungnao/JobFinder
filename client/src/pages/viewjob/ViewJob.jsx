@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
 import styles from "./viewjob.module.css";
 // import { useNavigate } from "react-router-dom";
-import { context } from "../../context/ContextApi";
 import Header from "../../components/header/Header";
 
 const ViewJob = () => {
-  const { isLoggedIn } = useContext(context);
+  const token = localStorage.getItem("access_token");
+
   // const navigate = useNavigate();
   return (
     <div className={styles.container}>
@@ -28,7 +27,7 @@ const ViewJob = () => {
           <div className={styles.jobInfoMetaData}>
             <div className={styles.companyDetails}>
               <p className={styles.jobPostedTimePast}>1w ago - Full time </p>
-              {isLoggedIn && (
+              {token !== "null" && (
                 <>
                   <img
                     src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
@@ -41,12 +40,12 @@ const ViewJob = () => {
 
             <div className={styles.jobTitle}>
               <h2>WordPress Development</h2>
-              {isLoggedIn && <button>Edit job</button>}
+              {token !== "null" && <button>Edit job</button>}
             </div>
             <p className={styles.jobLocation}>Bangalore | India</p>
             <div className={styles.salaryJobINfo}>
               <p>
-                <i class="fa-regular fa-money-bill-1"></i> Stipened
+                <i className="fa-regular fa-money-bill-1"></i> Stipened
               </p>
               <p>Rs 250000/month</p>
             </div>

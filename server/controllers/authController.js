@@ -112,4 +112,16 @@ const loginUser = async (req, res) => {
 };
 // login user end
 
-module.exports = { registerUser, loginUser };
+// logout user start
+const logoutUser = async (req, res, next) => {
+  try {
+    /* maxAge is the age of the cookie which is one milisecond, and removing the token value with empty string '' */
+    res.cookie("access_token", "", { maxAge: 1 });
+    return res.status(200).json({ message: "Succesfully logged out" });
+  } catch (error) {
+    next(createError(500, "Error logging out user"));
+  }
+};
+// logout user end
+
+module.exports = { registerUser, loginUser, logoutUser };

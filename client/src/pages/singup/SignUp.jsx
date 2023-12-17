@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./styleSignUp.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { context } from "../../context/ContextApi";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const { setIsLoggedIn } = useContext(context);
   const registerUrl = "http://localhost:3001/api/auth/registerUser";
   // state for user details
   const [userDetails, setUserDetails] = useState({
@@ -21,9 +23,10 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const result = await axios.post(`${registerUrl}`, userDetails);
-      navigate("/");
+      // setIsLoggedIn(true);
       localStorage.setItem("user", result.data.newUser.name); //storing user name in localstorage on succesful signup
       localStorage.setItem("access_token", result.data.token); //storing the token in localstorage on succesful signup
+      navigate("/");
     } catch (error) {
       toast.error(`${error.response.data.message}`, {
         position: "top-center",

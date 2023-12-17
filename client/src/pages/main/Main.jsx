@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
 import styles from "./main.module.css";
 import Header from "../../components/header/Header";
 import JobDetailCard from "../../components/jobdetailcard/JobDetailCard";
-import { context } from "../../context/ContextApi";
+
+import { useNavigate } from "react-router-dom";
 const Main = () => {
-  const { isLoggedIn } = useContext(context);
+  const navigate = useNavigate();
+  const token = localStorage.getItem("access_token");
+
   return (
     <div className={styles.container}>
       <Header />
@@ -57,7 +59,14 @@ const Main = () => {
             </div>
             <p className={styles.clearSkill}>Clear</p>
 
-            {isLoggedIn && <button className={styles.addJob}>+ Add Job</button>}
+            {token !== "null" && (
+              <button
+                className={styles.addJob}
+                onClick={() => navigate("/addjob")}
+              >
+                + Add Job
+              </button>
+            )}
           </div>
           {/* skill selecet end */}
         </div>

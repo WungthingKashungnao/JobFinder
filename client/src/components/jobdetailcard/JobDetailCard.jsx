@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
 import styles from "./jobdetailcard.module.css";
 import people from "./people.png";
-import { context } from "../../context/ContextApi";
+import { useNavigate } from "react-router-dom";
 
 const JobDetailCard = () => {
-  const { isLoggedIn } = useContext(context);
+  const token = localStorage.getItem("access_token");
+  const navigate = useNavigate();
   return (
     <div className={styles.container}>
       {/* job details start */}
@@ -45,11 +45,16 @@ const JobDetailCard = () => {
           <p className={styles.skillData}>JavaScript</p>
         </div>
         <div className={styles.viewEditJob}>
-          {isLoggedIn && (
+          {token !== "null" && (
             <button className={styles.editJobBtn}>Edit job</button>
           )}
 
-          <button className={styles.viewJobBtn}>View details</button>
+          <button
+            className={styles.viewJobBtn}
+            onClick={() => navigate("/viewjob")}
+          >
+            View details
+          </button>
         </div>
       </div>
       {/* job skills */}

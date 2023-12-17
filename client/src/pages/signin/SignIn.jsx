@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./stylesSignIn.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { context } from "../../context/ContextApi";
 
 const SignUp = () => {
+  const { setIsLoggedIn } = useContext(context);
   const loginUrl = `http://localhost:3001/api/auth/loginUser`;
   const navigate = useNavigate();
   // use details
@@ -20,7 +22,7 @@ const SignUp = () => {
       const result = await axios.post(`${loginUrl}`, user);
       localStorage.setItem("user", result.data.user.name); //storing user name in localstorage on succesful login
       localStorage.setItem("access_token", result.data.token); //storing the token in localstorage on succesful login
-      // navigate("/main");
+      // setIsLoggedIn(true);
       navigate("/");
     } catch (error) {
       toast.error("Icorrect email or password!", {

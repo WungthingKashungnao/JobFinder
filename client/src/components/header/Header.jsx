@@ -1,20 +1,30 @@
-import React, { useContext } from "react";
 import styles from "./header.module.css";
 import { useNavigate } from "react-router-dom";
-import { context } from "../../context/ContextApi";
+import axios from "axios";
 
 const Header = () => {
+  const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
-  const { isLoggedIn } = useContext(context);
+  // function to handle  logout start
+  const handleLogout = async () => {
+    // setIsLoggedIn(false);
+    localStorage.setItem("user", null);
+    localStorage.setItem("access_token", null);
+    await axios.get("http://localhost:3001/api/auth/logoutUser");
+    navigate("/signin");
+  };
+  // function to handle logout end
   return (
     <header>
-      <p className={styles.brand}>Jobfinder</p>
+      <p className={styles.brand} onClick={() => navigate("/")}>
+        Jobfinder
+      </p>
 
-      {isLoggedIn ? (
+      {token !== "null" ? (
         <>
           {/* logout start  */}
           <div className={styles.logoutCon}>
-            <p>Logout</p>
+            <p onClick={handleLogout}>Logout</p>
             <div className={styles.logooutRecruiter}>
               <span>Hello! Recruiter</span>
               <img

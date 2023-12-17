@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const context = createContext();
 
 const ContextApi = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true); //state for login status
+  const [isLoggedIn, setIsLoggedIn] = useState(false); //state for login status
   return (
     <context.Provider value={{ isLoggedIn, setIsLoggedIn }}>
       {children}
