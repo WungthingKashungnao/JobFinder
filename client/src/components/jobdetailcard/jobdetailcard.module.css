@@ -1,0 +1,88 @@
+.container {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  background-color: white;
+  padding: 1rem 1rem;
+  -webkit-box-shadow: 0px 2px 30px 5px #ff202040;
+  -moz-box-shadow: 0px 2px 30px 5px #ff202040;
+  box-shadow: 0px 2px 30px 5px #ff202040;
+  /* job details container start */
+  .jobDetailsCon {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    .logo {
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+    }
+
+    .jobDescrption {
+      .jobPosition {
+        font-weight: bold;
+      }
+      .jobInfo {
+        margin: 0.5rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .jobLocation {
+        font-weight: bold;
+        color: #ed5353;
+      }
+    }
+
+    .jobLocation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+  /* job details container end */
+
+  /* job skills start */
+  .jobSkills {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 1rem;
+    .skillList {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      .skillData {
+        padding: 0.5rem 1.3rem;
+        background-color: #ffeeee;
+        font-weight: 600;
+      }
+    }
+    .viewEditJob {
+      button {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-weight: bold;
+        outline: none;
+      }
+      .editJobBtn {
+        border: 2px solid #ed5353;
+        color: #ed5353;
+        background-color: white;
+
+        margin-right: 1rem;
+      }
+      .viewJobBtn {
+        border: none;
+        color: white;
+        background-color: #ed5353;
+      }
+    }
+  }
+  /* job skills end */
+}

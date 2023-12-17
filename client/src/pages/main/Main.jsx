@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./main.module.css";
 import Header from "../../components/header/Header";
+import JobDetailCard from "../../components/jobdetailcard/JobDetailCard";
+import { context } from "../../context/ContextApi";
 const Main = () => {
+  const { isLoggedIn } = useContext(context);
   return (
     <div className={styles.container}>
       <Header />
@@ -54,11 +57,20 @@ const Main = () => {
             </div>
             <p className={styles.clearSkill}>Clear</p>
 
-            <button className={styles.addJob}>+ Add Job</button>
+            {isLoggedIn && <button className={styles.addJob}>+ Add Job</button>}
           </div>
           {/* skill selecet end */}
         </div>
         {/* job filter end */}
+
+        {/* job details card section start*/}
+        <section className={styles.jobDetailCardSection}>
+          <JobDetailCard />
+          <JobDetailCard />
+          <JobDetailCard />
+          <JobDetailCard />
+        </section>
+        {/* job details card section end */}
       </div>
       {/* job list container end */}
     </div>

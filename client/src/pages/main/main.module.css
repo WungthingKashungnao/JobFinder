@@ -21,7 +21,7 @@
     form {
       border: 1px solid #9c9c9c;
       border-radius: 5px;
-      padding: 0.5rem;
+      padding: 0.7rem 0.5rem;
       width: 100%;
       display: flex;
       justify-content: flex-start;
@@ -100,13 +100,25 @@
 
       .addJob {
         padding: 0.5rem 1rem;
-        background-color: #ff6b6b;
+        background-color: #ed5353;
         color: white;
         font-weight: bold;
         border: none;
         outline: none;
+        cursor: pointer;
       }
     }
   }
   /* filter job end */
+
+  /* job details card section start*/
+  .jobDetailCardSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+  /* job details card section end */
 }
