@@ -45,8 +45,13 @@ const JobDetailCard = () => {
           <p className={styles.skillData}>JavaScript</p>
         </div>
         <div className={styles.viewEditJob}>
-          {token !== "null" && (
-            <button className={styles.editJobBtn}>Edit job</button>
+          {token && token !== "null" && (
+            <button
+              className={styles.editJobBtn}
+              onClick={() => navigate("/editjob")}
+            >
+              Edit job
+            </button>
           )}
 
           <button

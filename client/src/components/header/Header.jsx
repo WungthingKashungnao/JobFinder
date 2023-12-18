@@ -20,7 +20,7 @@ const Header = () => {
         Jobfinder
       </p>
 
-      {token !== "null" ? (
+      {token && token !== "null" ? (
         <>
           {/* logout start  */}
           <div className={styles.logoutCon}>

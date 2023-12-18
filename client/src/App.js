@@ -7,6 +7,7 @@ import NotFound from "./pages/notfound/NotFound";
 import AddJob from "./pages/addjob/AddJob";
 import ViewJob from "./pages/viewjob/ViewJob";
 import Auth from "./utils/Auth.js";
+import EditJob from "./pages/editjob/EditJob.jsx";
 
 function App() {
   return (
@@ -20,6 +21,15 @@ function App() {
           element={
             <Auth>
               <AddJob />
+            </Auth>
+          }
+        />
+
+        <Route
+          path="/editjob"
+          element={
+            <Auth>
+              <EditJob />
             </Auth>
           }
         />

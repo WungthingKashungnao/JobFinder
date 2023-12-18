@@ -1,0 +1,124 @@
+/* removing spinner arrows from input type numer */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+/* removing spinner arrows from input type numer */
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+/* left start */
+.left {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  flex: 3;
+  padding: 2% 3%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  /* left inner start */
+  .leftInner {
+    width: 90%;
+    /* form start */
+    form {
+      margin-top: 4%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      /* inptCon start */
+      .inptCon {
+        display: flex;
+        justify-content: start;
+        gap: 1rem;
+        align-items: center;
+        label {
+          width: 20%;
+          font-weight: 500;
+          font-size: 1.1rem;
+        }
+        input {
+          padding: 0.8rem 1rem;
+          width: 80%;
+          border: 2px solid #c2c2c2;
+          border-radius: 5px;
+          outline: none;
+        }
+        select {
+          padding: 0.5rem 1rem;
+          color: #757587;
+          border: 2px solid #c2c2c2;
+          border-radius: 5px;
+          outline: none;
+        }
+        textarea {
+          width: 80%;
+          padding: 0.8rem 1rem;
+          border: 2px solid #c2c2c2;
+          border-radius: 5px;
+          outline: none;
+          resize: none;
+          height: 5.5rem;
+        }
+
+        .txtLbl {
+          align-self: self-start;
+        }
+      }
+      /* inptCon end */
+      .btnCon {
+        align-self: flex-end;
+        button {
+          padding: 1rem 2.3rem;
+          border-radius: 5px;
+          outline: none;
+          cursor: pointer;
+          font-size: 1rem;
+        }
+        .resetBtn {
+          border: 1px solid #cecece;
+          color: #757587;
+          font-weight: bold;
+          background-color: transparent;
+          margin-right: 1rem;
+        }
+        .sbmtBtn {
+          background-color: #ed5353;
+          color: white;
+          font-weight: bold;
+          border: none;
+        }
+      }
+    }
+    /* form end */
+  }
+  /* left inner end*/
+}
+/* left end */
+/* right start */
+.right {
+  width: 100%;
+  height: 100%;
+  flex: 2;
+  background-image: url("../../images/bg2.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  h2 {
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+/* right end */

@@ -1,8 +1,10 @@
 import styles from "./viewjob.module.css";
 // import { useNavigate } from "react-router-dom";
 import Header from "../../components/header/Header";
+import { useNavigate } from "react-router-dom";
 
 const ViewJob = () => {
+  const navigate = useNavigate();
   const token = localStorage.getItem("access_token");
 
   // const navigate = useNavigate();
@@ -27,7 +29,7 @@ const ViewJob = () => {
           <div className={styles.jobInfoMetaData}>
             <div className={styles.companyDetails}>
               <p className={styles.jobPostedTimePast}>1w ago - Full time </p>
-              {token !== "null" && (
+              {token && token !== "null" && (
                 <>
                   <img
                     src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
@@ -40,7 +42,9 @@ const ViewJob = () => {
 
             <div className={styles.jobTitle}>
               <h2>WordPress Development</h2>
-              {token !== "null" && <button>Edit job</button>}
+              {token && token !== "null" && (
+                <button onClick={() => navigate("/editjob")}>Edit job</button>
+              )}
             </div>
             <p className={styles.jobLocation}>Bangalore | India</p>
             <div className={styles.salaryJobINfo}>

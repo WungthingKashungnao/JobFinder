@@ -59,7 +59,7 @@ const Main = () => {
             </div>
             <p className={styles.clearSkill}>Clear</p>
 
-            {token !== "null" && (
+            {token && token !== "null" && (
               <button
                 className={styles.addJob}
                 onClick={() => navigate("/addjob")}
