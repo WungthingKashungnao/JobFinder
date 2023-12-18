@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Header = () => {
+  const recruiter = localStorage.getItem("user");
   const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
   // function to handle  logout start
@@ -26,7 +27,7 @@ const Header = () => {
           <div className={styles.logoutCon}>
             <p onClick={handleLogout}>Logout</p>
             <div className={styles.logooutRecruiter}>
-              <span>Hello! Recruiter</span>
+              <span>Hello! {recruiter}</span>
               <img
                 src="https://xsgames.co/randomusers/avatar.php?g=female"
                 alt=""

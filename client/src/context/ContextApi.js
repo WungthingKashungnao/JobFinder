@@ -3,9 +3,9 @@ import { createContext, useState } from "react";
 export const context = createContext();
 
 const ContextApi = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); //state for login status
+  const [resultOfFilter, setResultOfFilter] = useState();
   return (
-    <context.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <context.Provider value={{ resultOfFilter, setResultOfFilter }}>
       {children}
     </context.Provider>
   );

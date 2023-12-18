@@ -19,93 +19,107 @@
     -moz-box-shadow: 0px 2px 30px 5px #ff202040;
     box-shadow: 0px 2px 30px 5px #ff202040;
     form {
-      border: 1px solid #9c9c9c;
-      border-radius: 5px;
-      padding: 0.7rem 0.5rem;
       width: 100%;
       display: flex;
       justify-content: flex-start;
       align-items: center;
-      i {
-        color: #9c9c9c;
-      }
-      input {
-        color: #9c9c9c;
-        font-weight: bold;
-        margin-left: 0.5rem;
-        width: 100%;
-        border: none;
-        outline: none;
-        ::placeholder {
-          color: #9c9c9c;
-        }
-      }
-    }
-    .skillSelect {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 1rem;
-      width: 100%;
+      /*  */
+      flex-direction: column;
+      /*  */
 
-      .skillDisplay {
+      .inputFrm {
+        width: 100%;
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        gap: 1rem;
-        select {
-          padding: 0.5rem 0.8rem;
-          border-radius: 5px;
+        border: 1px solid #9c9c9c;
+        border-radius: 5px;
+        padding: 0.7rem 0.5rem;
+        i {
           color: #9c9c9c;
-          outline: none;
+        }
+        input {
+          color: #9c9c9c;
           font-weight: bold;
+          margin-left: 0.5rem;
+          width: 100%;
+          border: none;
+          outline: none;
+          ::placeholder {
+            color: #9c9c9c;
+          }
         }
       }
-      .slectedSkills {
+
+      .skillSelect {
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         gap: 1rem;
-        .skillCon {
+        margin-top: 1rem;
+        width: 100%;
+
+        .skillDisplay {
           display: flex;
+          flex-wrap: wrap;
           justify-content: center;
           align-items: center;
-          .skillName {
-            padding: 0.5rem 1rem;
-            background-color: #ffeeee;
+          gap: 1rem;
+          select {
+            padding: 0.5rem 0.8rem;
+            border-radius: 5px;
+            color: #9c9c9c;
+            outline: none;
+            font-weight: bold;
           }
-          .skillDelete {
-            background-color: #ff6b6b;
-            padding: 0.5rem 1rem;
+        }
+        .slectedSkills {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+          .skillCon {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
+            .skillName {
+              padding: 0.5rem 1rem;
+              background-color: #ffeeee;
+            }
+            .skillDelete {
+              background-color: #ff6b6b;
+              padding: 0.5rem 1rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              font-weight: bold;
+              color: white;
+              cursor: pointer;
+            }
           }
         }
-      }
 
-      .clearSkill {
-        color: #ff6b6b;
-        font-weight: bold;
-        cursor: pointer;
-      }
+        .clearSkill {
+          color: #ff6b6b;
+          font-weight: bold;
+          cursor: pointer;
+          background: transparent;
+          border: none;
+          outline: none;
+        }
 
-      .addJob {
-        padding: 0.5rem 1rem;
-        background-color: #ed5353;
-        color: white;
-        font-weight: bold;
-        border: none;
-        outline: none;
-        cursor: pointer;
+        .addJob {
+          padding: 0.5rem 1rem;
+          background-color: #ed5353;
+          color: white;
+          font-weight: bold;
+          border: none;
+          outline: none;
+          cursor: pointer;
+        }
       }
     }
   }

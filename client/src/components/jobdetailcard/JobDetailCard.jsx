@@ -2,7 +2,7 @@ import styles from "./jobdetailcard.module.css";
 import people from "./people.png";
 import { useNavigate } from "react-router-dom";
 
-const JobDetailCard = () => {
+const JobDetailCard = ({ data }) => {
   const token = localStorage.getItem("access_token");
   const navigate = useNavigate();
   return (
@@ -11,27 +11,24 @@ const JobDetailCard = () => {
       <div className={styles.jobDetailsCon}>
         {/* logo start */}
         <div className={styles.logo}>
-          <img
-            src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
-            alt=""
-          />
+          <img src={data.logoUrl} alt="" />
         </div>
         {/* logo end */}
         {/* description start */}
         <div className={styles.jobDescrption}>
-          <p className={styles.jobPosition}>Frontend Developer</p>
+          <p className={styles.jobPosition}>{data.position}</p>
           <div className={styles.jobInfo}>
             <div>
               <span>
                 <img src={people} alt="" /> 11-50
               </span>
             </div>
-            <div>&#x20B9; 50,0000</div>
-            <div>Delhi</div>
+            <div>&#x20B9; {data.salary}</div>
+            <div>{data.location}</div>
           </div>
           <div className={styles.jobLocation}>
-            <p>Office </p>
-            <p>Fulltime</p>
+            <p>{data.jobPlace} </p>
+            <p>{data.jobType}</p>
           </div>
         </div>
         {/* description end */}
@@ -40,9 +37,11 @@ const JobDetailCard = () => {
       {/* job skills start */}
       <div className={styles.jobSkills}>
         <div className={styles.skillList}>
-          <p className={styles.skillData}>Frontend</p>
-          <p className={styles.skillData}>CSS</p>
-          <p className={styles.skillData}>JavaScript</p>
+          {data?.skills?.map((val, idx) => (
+            <p className={styles.skillData} key={idx}>
+              {val}
+            </p>
+          ))}
         </div>
         <div className={styles.viewEditJob}>
           {token && token !== "null" && (
