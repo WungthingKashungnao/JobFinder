@@ -4,9 +4,10 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const AddJob = () => {
-  // const createJobUrl = `http://localhost:3001/api/job/createJob`;
+  const navigate = useNavigate();
   const token = localStorage.getItem("access_token"); //accessing the stored in localstorage
   const decodedToken = jwtDecode(token); //using jwt-decode package to decode the token
   const userId = decodedToken.id;
@@ -39,7 +40,7 @@ const AddJob = () => {
         message: "successfully added a new job",
         result,
       });
-      toast.success("🦄 Wow so easy!", {
+      toast.success("Successfully created a new job!", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -202,7 +203,11 @@ const AddJob = () => {
             </div>
 
             <div className={styles.btnCon}>
-              <button type="reset" className={styles.resetBtn}>
+              <button
+                type="reset"
+                className={styles.resetBtn}
+                onClick={() => navigate("/")}
+              >
                 Cancel
               </button>
               <button type="submit" className={styles.sbmtBtn}>

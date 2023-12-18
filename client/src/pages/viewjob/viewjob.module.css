@@ -106,8 +106,11 @@
     }
 
     .skillsRequired {
+      width: 100%;
       .skillList {
+        width: 100%;
         display: flex;
+        flex-wrap: wrap;
         gap: 1rem;
         .skills {
           background-color: #ffeeee;

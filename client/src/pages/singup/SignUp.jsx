@@ -1,14 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styles from "./styleSignUp.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { context } from "../../context/ContextApi";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const { setIsLoggedIn } = useContext(context);
   const registerUrl = "http://localhost:3001/api/auth/registerUser";
   // state for user details
   const [userDetails, setUserDetails] = useState({
@@ -108,7 +106,7 @@ const SignUp = () => {
             <button>Create Account</button>
             <p>
               Already have an account?{" "}
-              <Link to={"/"} className={styles.highlight}>
+              <Link to={"/signin"} className={styles.highlight}>
                 Sign In
               </Link>
             </p>

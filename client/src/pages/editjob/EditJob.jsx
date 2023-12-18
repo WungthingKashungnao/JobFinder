@@ -1,28 +1,32 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./editjob.module.css";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { context } from "../../context/ContextApi";
+import { useNavigate } from "react-router-dom";
 
 const EditJob = () => {
+  const navigate = useNavigate();
+  const { jobDescription } = useContext(context);
   // const createJobUrl = `http://localhost:3001/api/job/createJob`;
   const token = localStorage.getItem("access_token"); //accessing the stored in localstorage
   const decodedToken = jwtDecode(token); //using jwt-decode package to decode the token
   const userId = decodedToken.id;
   const [job, setJob] = useState({
-    name: "",
-    recruiter: "",
-    logoUrl: "",
-    position: "",
-    salary: "",
-    jobType: "",
-    jobPlace: "",
-    location: "",
-    description: "",
-    about: "",
-    skills: "",
-    information: "",
+    name: jobDescription?.name,
+    recruiter: jobDescription?.recruiter,
+    logoUrl: jobDescription?.logoUrl,
+    position: jobDescription?.position,
+    salary: jobDescription?.salary,
+    jobType: jobDescription?.jobType,
+    jobPlace: jobDescription?.jobPlace,
+    location: jobDescription?.location,
+    description: jobDescription?.description,
+    about: jobDescription?.about,
+    skills: jobDescription?.skills,
+    information: jobDescription?.information,
     token: token,
   });
 
@@ -31,15 +35,15 @@ const EditJob = () => {
     e.preventDefault();
 
     try {
-      const result = await axios.post(
-        `http://localhost:3001/api/job/createJob/${userId}`,
+      const result = await axios.put(
+        `http://localhost:3001/api/job/updateJOb/${userId}/${jobDescription._id}`,
         job
       );
       console.log({
         message: "successfully added a new job",
         result,
       });
-      toast.success("🦄 Wow so easy!", {
+      toast.success("Sucessfully edited the job!", {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -202,7 +206,11 @@ const EditJob = () => {
             </div>
 
             <div className={styles.btnCon}>
-              <button type="reset" className={styles.resetBtn}>
+              <button
+                type="reset"
+                className={styles.resetBtn}
+                onClick={() => navigate("/")}
+              >
                 Cancel
               </button>
               <button type="submit" className={styles.sbmtBtn}>

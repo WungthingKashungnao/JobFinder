@@ -99,7 +99,7 @@ const createJob = async (req, res, next) => {
 const editJob = async (req, res, next) => {
   try {
     const jobId = req.params.jobId;
-    const newJobUpdate = req.body;
+    let newJobUpdate = req.body;
     const userId = req.params.userId;
     const recruiterData = await UserModel.findById(userId); //trying to get recruiter name from user model
     const jobRecruiter = await jobModel.findById(jobId); //trying to get recruiter name from jobmodel
@@ -108,6 +108,14 @@ const editJob = async (req, res, next) => {
       return next(createError(400, "This job post does not belong to you"));
     }
 
+    // logic to split string by comma and store them in an array start
+    const skillData = req.body.skills;
+    let skillsArray = skillData;
+    if (typeof skillData === "string") {
+      skillsArray = skillData.split(",").map((skill) => skill.trim());
+    }
+    // logic to split string by comma and store them in an array end
+    newJobUpdate = { ...newJobUpdate, skills: skillsArray };
     const jobToEditUpdate = await jobModel.findByIdAndUpdate(
       jobId,
       {
