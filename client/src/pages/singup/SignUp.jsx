@@ -7,7 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const registerUrl = "http://localhost:3001/api/auth/registerUser";
+  const registerUrl =
+    "https://job-listing-green.vercel.app/api/auth/registerUser";
   // state for user details
   const [userDetails, setUserDetails] = useState({
     name: "",

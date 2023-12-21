@@ -36,7 +36,7 @@ const EditJob = () => {
 
     try {
       const result = await axios.put(
-        `http://localhost:3001/api/job/updateJOb/${userId}/${jobDescription._id}`,
+        `https://job-listing-green.vercel.app/api/job/updateJOb/${userId}/${jobDescription._id}`,
         job
       );
       console.log({
