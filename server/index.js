@@ -12,7 +12,13 @@ const jobRouter = require("./routes/jobRoutes.js");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://job-listing-client-lac.vercel.app"],
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(cookieParser());
 
 // routes start
