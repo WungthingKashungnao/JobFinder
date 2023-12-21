@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://ornate-speculoos-7853c9.netlify.app"],
+    origin: ["https://job-listing-client-lac.vercel.app"],
     methods: ["POST", "GET", "PUT"],
     credentials: true,
   })
