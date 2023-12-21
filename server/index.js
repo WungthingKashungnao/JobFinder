@@ -16,6 +16,9 @@ app.use(cors());
 app.use(cookieParser());
 
 // routes start
+app.get("/", (req, res) => {
+  res.status(200).json("Home");
+});
 app.use("/api", healthRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/job", jobRouter);
