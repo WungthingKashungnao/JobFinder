@@ -164,6 +164,8 @@ const filterJob = async (req, res, next) => {
       message: "successfully filtered job",
       length: filteredJob.length,
       filteredJob,
+      skills,
+      position,
     });
   } catch (error) {
     console.log({
@@ -171,7 +173,7 @@ const filterJob = async (req, res, next) => {
       error,
     });
 
-    next(createError(500, "Error filtering job!"));
+    return next(createError(500, "Error filtering job!"));
   }
 };
 // filter job end
