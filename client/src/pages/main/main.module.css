@@ -91,6 +91,7 @@
             align-items: center;
             .skillItemCon {
               display: flex;
+              flex-wrap: wrap;
               .skillName {
                 padding: 0.5rem 1rem;
                 background-color: #ffeeee;
