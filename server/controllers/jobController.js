@@ -151,9 +151,14 @@ const filterJob = async (req, res, next) => {
     // const filteredJob = await jobModel.find({
     //   $or: [{ skills: `${skills}` }, { position: `${position}` }],
     // });
-    const filteredJob = await jobModel.find({
-      $or: [{ skills: { $in: `${skills}` } }, { position: `${position}` }],
-    });
+    let query = {};
+    if (position) {
+      query.position = position;
+    }
+    if (skills) {
+      query.skills = { $in: skills.split("&") };
+    }
+    const filteredJob = await jobModel.find(query).sort({ createdAt: -1 });
 
     return res.status(200).json({
       message: "successfully filtered job",
