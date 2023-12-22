@@ -40,15 +40,8 @@ const Main = () => {
                 placeholder="Type any job title"
                 name="position"
                 value={filterJob.title}
-                // onChange={(e) =>
-                //   setFilterJob({ ...filterJob, title: e.target.value })
-                // }
-
                 onChange={(e) =>
-                  setFilterJob((prev) => ({
-                    ...prev,
-                    skills: [...prev.skills, e.target.value],
-                  }))
+                  setFilterJob({ ...filterJob, title: e.target.value })
                 }
               />
             </div>
@@ -57,8 +50,14 @@ const Main = () => {
               <div className={styles.skillDisplay}>
                 <select
                   name="skills"
+                  // onChange={(e) =>
+                  //   setFilterJob({ ...filterJob, skills: e.target.value })
+                  // }
                   onChange={(e) =>
-                    setFilterJob({ ...filterJob, skills: e.target.value })
+                    setFilterJob((prev) => ({
+                      ...prev,
+                      skills: [...prev.skills, e.target.value],
+                    }))
                   }
                   defaultValue={filterJob.skills}
                 >
@@ -99,7 +98,7 @@ const Main = () => {
                     filterJob.skills.length !== 0) && (
                     <div className={styles.skillCon}>
                       {filterJob.skills.map((val, idx) => (
-                        <span key={idx}>
+                        <div className={styles.skillItemCon} key={idx}>
                           <span className={styles.skillName}>{val}</span>
                           <span
                             className={styles.skillDelete}
@@ -114,7 +113,7 @@ const Main = () => {
                           >
                             x
                           </span>
-                        </span>
+                        </div>
                       ))}
                     </div>
                   )}
@@ -124,7 +123,7 @@ const Main = () => {
                 type="reset"
                 className={styles.clearSkill}
                 onClick={() =>
-                  setFilterJob({ ...filterJob, skills: "", title: "" })
+                  setFilterJob({ ...filterJob, skills: [], title: "" })
                 }
               >
                 Clear

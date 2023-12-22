@@ -89,19 +89,22 @@
             gap: 0.6rem;
             justify-content: center;
             align-items: center;
-            .skillName {
-              padding: 0.5rem 1rem;
-              background-color: #ffeeee;
-            }
-            .skillDelete {
-              background-color: #ff6b6b;
-              padding: 0.5rem 1rem;
+            .skillItemCon {
               display: flex;
-              justify-content: center;
-              align-items: center;
-              font-weight: bold;
-              color: white;
-              cursor: pointer;
+              .skillName {
+                padding: 0.5rem 1rem;
+                background-color: #ffeeee;
+              }
+              .skillDelete {
+                background-color: #ff6b6b;
+                padding: 0.5rem 1rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+                color: white;
+                cursor: pointer;
+              }
             }
           }
         }
