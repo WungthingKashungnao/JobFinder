@@ -1,6 +1,6 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const cors = require("cors");
+// const cors = require("cors");
 require("dotenv").config();
 
 // local import start
@@ -12,13 +12,35 @@ const jobRouter = require("./routes/jobRoutes.js");
 
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: "https://job-listing-client-lac.vercel.app",
-    methods: ["POST", "GET", "PUT"],
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "https://job-listing-client-lac.vercel.app",
+//     methods: ["POST", "GET", "PUT"],
+//     credentials: true,
+//   })
+// );
+
+// Set middleware of CORS
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://job-listing-client-lac.vercel.app"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Private-Network", true);
+  //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
+  res.setHeader("Access-Control-Max-Age", 7200);
+
+  next();
+});
 
 app.use(cookieParser());
 
