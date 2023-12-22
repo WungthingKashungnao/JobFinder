@@ -22,7 +22,6 @@ const Main = () => {
       filterJob
     );
 
-    console.log("from browser=>", filterJob);
     console.log(result.data.filteredJob);
     setResultOfFilter(result.data.filteredJob);
   };

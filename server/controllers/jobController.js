@@ -156,7 +156,7 @@ const filterJob = async (req, res, next) => {
       query.position = position;
     }
     if (skills) {
-      query.skills = { $in: skills.split("&") };
+      query.skills = { $in: skills };
     }
     const filteredJob = await jobModel.find(query).sort({ createdAt: -1 });
 
