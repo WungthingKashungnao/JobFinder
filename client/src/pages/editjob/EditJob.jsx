@@ -55,6 +55,16 @@ const EditJob = () => {
       });
     } catch (error) {
       console.log(error);
+      toast.warn("Only the original recruiter can edit the job post!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
 
