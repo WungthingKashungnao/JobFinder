@@ -12,7 +12,7 @@ const Main = () => {
   const token = localStorage.getItem("access_token");
   const [filterJob, setFilterJob] = useState({
     title: "",
-    skills: "",
+    skills: [],
   });
 
   const findTheJOb = async (e) => {
@@ -40,8 +40,15 @@ const Main = () => {
                 placeholder="Type any job title"
                 name="position"
                 value={filterJob.title}
+                // onChange={(e) =>
+                //   setFilterJob({ ...filterJob, title: e.target.value })
+                // }
+
                 onChange={(e) =>
-                  setFilterJob({ ...filterJob, title: e.target.value })
+                  setFilterJob((prev) => ({
+                    ...prev,
+                    skills: [...prev.skills, e.target.value],
+                  }))
                 }
               />
             </div>
@@ -72,7 +79,7 @@ const Main = () => {
                 </select>
 
                 <div className={styles.slectedSkills}>
-                  {filterJob.skills !== "" && (
+                  {/* {filterJob.skills !== "" && (
                     <div className={styles.skillCon}>
                       <span className={styles.skillName}>
                         {filterJob.skills}
@@ -85,6 +92,30 @@ const Main = () => {
                       >
                         x
                       </span>
+                    </div>
+                  )} */}
+
+                  {(filterJob.skills !== null ||
+                    filterJob.skills.length !== 0) && (
+                    <div className={styles.skillCon}>
+                      {filterJob.skills.map((val, idx) => (
+                        <span key={idx}>
+                          <span className={styles.skillName}>{val}</span>
+                          <span
+                            className={styles.skillDelete}
+                            onClick={() =>
+                              setFilterJob({
+                                ...filterJob,
+                                skills: filterJob.skills.filter(
+                                  (data) => data != val
+                                ),
+                              })
+                            }
+                          >
+                            x
+                          </span>
+                        </span>
+                      ))}
                     </div>
                   )}
                 </div>
