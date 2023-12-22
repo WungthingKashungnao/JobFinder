@@ -33,7 +33,7 @@ const AddJob = () => {
 
     try {
       const result = await axios.post(
-        `https://job-listing-green.vercel.app/api/job/createJob/${userId}`,
+        `https://job-listing-api-za8o.onrender.com/api/job/createJob/${userId}`,
         job
       );
       console.log({

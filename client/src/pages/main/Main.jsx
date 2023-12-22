@@ -18,7 +18,7 @@ const Main = () => {
   const findTheJOb = async (e) => {
     e.preventDefault();
     const result = await axios.post(
-      "https://job-listing-green.vercel.app/api/job/filterJOb",
+      "https://job-listing-api-za8o.onrender.com/api/job/filterJOb",
       filterJob
     );
     console.log(result.data.filteredJob);

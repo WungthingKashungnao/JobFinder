@@ -11,7 +11,9 @@ const Header = () => {
     // setIsLoggedIn(false);
     localStorage.setItem("user", null);
     localStorage.setItem("access_token", null);
-    await axios.get("https://job-listing-green.vercel.app/api/auth/logoutUser");
+    await axios.get(
+      "https://job-listing-api-za8o.onrender.com/api/auth/logoutUser"
+    );
     navigate("/signin");
   };
   // function to handle logout end

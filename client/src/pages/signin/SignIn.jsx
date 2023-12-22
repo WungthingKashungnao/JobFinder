@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 const SignUp = () => {
-  const loginUrl = `https://job-listing-green.vercel.app/api/auth/loginUser`;
+  const loginUrl = `https://job-listing-api-za8o.onrender.com/api/auth/loginUser`;
   const navigate = useNavigate();
   // use details
   const [user, setUser] = useState({
