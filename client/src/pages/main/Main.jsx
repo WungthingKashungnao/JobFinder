@@ -25,14 +25,6 @@ const Main = () => {
     // console.log(result.data.filteredJob);
     setResultOfFilter(result.data.filteredJob);
   };
-  const handleDeleteSkills = (val) => {
-    setFilterJob({
-      ...filterJob,
-      skills: filterJob.skills.filter((data) => data != val),
-    });
-
-    findTheJOb();
-  };
 
   return (
     <div className={styles.container}>
@@ -93,15 +85,14 @@ const Main = () => {
                           <span className={styles.skillName}>{val}</span>
                           <span
                             className={styles.skillDelete}
-                            onClick={handleDeleteSkills(val)}
-                            // onClick={() =>
-                            //   setFilterJob({
-                            //     ...filterJob,
-                            //     skills: filterJob.skills.filter(
-                            //       (data) => data != val
-                            //     ),
-                            //   })
-                            // }
+                            onClick={() =>
+                              setFilterJob({
+                                ...filterJob,
+                                skills: filterJob.skills.filter(
+                                  (data) => data != val
+                                ),
+                              })
+                            }
                           >
                             x
                           </span>
