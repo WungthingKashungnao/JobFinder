@@ -151,10 +151,12 @@ const filterJob = async (req, res, next) => {
     // const filteredJob = await jobModel.find({
     //   $or: [{ skills: `${skills}` }, { position: `${position}` }],
     // });
-    const filteredJob = await jobModel.find({
-      skills: { $in: `${skills}` },
-      position: position,
-    });
+    const filteredJob = await jobModel.find(
+      {
+        skills: { $in: `${skills}` },
+      },
+      { position: position }
+    );
 
     return res.status(200).json({
       message: "successfully filtered job",
