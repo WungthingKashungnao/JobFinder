@@ -112,6 +112,7 @@ const Main = () => {
                                 ),
                               })
                             }
+                            onChange={findTheJOb}
                           >
                             x
                           </span>
