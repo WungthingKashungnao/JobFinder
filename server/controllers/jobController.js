@@ -148,15 +148,9 @@ const filterJob = async (req, res, next) => {
       next(createError(400, "atleast one filter field is required"));
     }
 
-    // const filteredJob = await jobModel.find({
-    //   $or: [{ skills: `${skills}` }, { position: `${position}` }],
-    // });
-    const filteredJob = await jobModel.find(
-      // {
-      //   skills: { $in: `${skills}` },
-      // },
-      { position: position }
-    );
+    const filteredJob = await jobModel.find({
+      $or: [{ skills: { $in: skills } }, { position: `${position}` }],
+    });
 
     return res.status(200).json({
       message: "successfully filtered job",
