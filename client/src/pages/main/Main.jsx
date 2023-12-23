@@ -22,7 +22,7 @@ const Main = () => {
       filterJob
     );
 
-    console.log(result.data.filteredJob);
+    // console.log(result.data.filteredJob);
     setResultOfFilter(result.data.filteredJob);
   };
 
@@ -60,6 +60,7 @@ const Main = () => {
                       skills: [...prev.skills, e.target.value],
                     }))
                   }
+                  onClick={findTheJOb}
                   defaultValue={filterJob.skills}
                 >
                   <option value="" disabled>
