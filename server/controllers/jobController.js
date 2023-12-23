@@ -152,7 +152,8 @@ const filterJob = async (req, res, next) => {
     //   $or: [{ skills: `${skills}` }, { position: `${position}` }],
     // });
     const filteredJob = await jobModel.find({
-      $or: [{ skills: { $in: `${skills}` } }, { position: `${position}` }],
+      skills: { $in: `${skills}` },
+      position: position,
     });
 
     return res.status(200).json({
