@@ -25,6 +25,14 @@ const Main = () => {
     // console.log(result.data.filteredJob);
     setResultOfFilter(result.data.filteredJob);
   };
+  const handleDeleteSkills = (val) => {
+    setFilterJob({
+      ...filterJob,
+      skills: filterJob.skills.filter((data) => data != val),
+    });
+
+    findTheJOb();
+  };
 
   return (
     <div className={styles.container}>
@@ -51,9 +59,6 @@ const Main = () => {
               <div className={styles.skillDisplay}>
                 <select
                   name="skills"
-                  // onChange={(e) =>
-                  //   setFilterJob({ ...filterJob, skills: e.target.value })
-                  // }
                   onChange={(e) =>
                     setFilterJob((prev) => ({
                       ...prev,
@@ -80,22 +85,6 @@ const Main = () => {
                 </select>
 
                 <div className={styles.slectedSkills}>
-                  {/* {filterJob.skills !== "" && (
-                    <div className={styles.skillCon}>
-                      <span className={styles.skillName}>
-                        {filterJob.skills}
-                      </span>
-                      <span
-                        className={styles.skillDelete}
-                        onClick={() =>
-                          setFilterJob({ ...filterJob, skills: "" })
-                        }
-                      >
-                        x
-                      </span>
-                    </div>
-                  )} */}
-
                   {(filterJob.skills !== null ||
                     filterJob.skills.length !== 0) && (
                     <div className={styles.skillCon}>
@@ -104,15 +93,15 @@ const Main = () => {
                           <span className={styles.skillName}>{val}</span>
                           <span
                             className={styles.skillDelete}
-                            onClick={() =>
-                              setFilterJob({
-                                ...filterJob,
-                                skills: filterJob.skills.filter(
-                                  (data) => data != val
-                                ),
-                              })
-                            }
-                            onChange={findTheJOb}
+                            onClick={handleDeleteSkills(val)}
+                            // onClick={() =>
+                            //   setFilterJob({
+                            //     ...filterJob,
+                            //     skills: filterJob.skills.filter(
+                            //       (data) => data != val
+                            //     ),
+                            //   })
+                            // }
                           >
                             x
                           </span>
